@@ -12,15 +12,35 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
+      title: 'หน้าหลัก',
       url: '/home',
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'เกี่ยวกับ',
+      url: '/about',
+      icon: 'information-circle-outline'
+    },
+    {
+      title: 'ติดต่อ',
+      url: '/contact',
+      icon: 'call'
+    },
+    {
+      title: 'บทเรียน',
+      url: '/lesson',
+      icon: 'book'
     }
+    , {
+      title: 'แบบทดสอบก่อน-หลังเรียน',
+      url: '/test',
+      icon: 'paper'
+    }, {
+      title: 'ออกจากระบบ',
+      url: '',
+      icon: 'log-out'
+    }
+
   ];
 
   constructor(
