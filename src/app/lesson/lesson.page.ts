@@ -12,8 +12,11 @@ export class LessonPage implements OnInit {
 
   ngOnInit() {
   }
-  goHome() {
-    this.router.navigate(['/home']);
+  lessonStart() {
+    this.router.navigate(['/lesson-start']);
+  }
+  lessonEnd() {
+    this.router.navigate(['/lesson-end']);
   }
 
 }

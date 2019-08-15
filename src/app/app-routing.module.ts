@@ -21,9 +21,11 @@ const routes: Routes = [
   { path: 'test', loadChildren: './test/test.module#TestPageModule' },
   { path: 'login', loadChildren: './auth/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
-
-  { path: 'lesson-start', loadChildren: './lesson-start/lesson.module#LessonPageModule' },
-  { path: 'lesson-end', loadChildren: './lesson-end/lesson.module#LessonPageModule' },
+  { path: 'lesson-start', loadChildren: './lesson-start/lesson-start.module#LessonStartPageModule' },
+  { path: 'lesson-end', loadChildren: './lesson-end/lesson-end.module#LessonEndPageModule' },
+  { path: 'test-start', loadChildren: './test-start/test-start.module#TestStartPageModule' },
+  { path: 'test-end', loadChildren: './test-end/test-end.module#TestEndPageModule' },
+ 
 ];
 
 @NgModule({
