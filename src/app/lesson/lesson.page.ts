@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LessonService } from './../services/lesson.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lesson',
@@ -7,16 +9,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./lesson.page.scss'],
 })
 export class LessonPage implements OnInit {
-
-  constructor(private router: Router) { }
+  lessons: any;
+  constructor(
+    private router: Router,
+    private lessonService: LessonService,
+    public alertController: AlertController
+    ) { }
 
   ngOnInit() {
+    this.getLessons();
+  } 
+  getLessons() {
+    this.lessonService.getLessons('').subscribe(result => {
+      if (result.success === true) {
+        this.lessons = result.data;
+      } else {
+        this.presentAlert('Warning', result.data);
+      }
+    });
   }
-  lessonStart() {
-    this.router.navigate(['/lesson-start']);
+  lessonDetail(data: any) { 
+    this.router.navigate(['/lesson-start', {id: data.id}]); 
   }
-  lessonEnd() {
-    this.router.navigate(['/lesson-end']);
+  async presentAlert(header: string, message: string) {  
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 }

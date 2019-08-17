@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'login', loadChildren: './auth/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'lesson-start', loadChildren: './lesson-start/lesson-start.module#LessonStartPageModule' },
-  { path: 'lesson-end', loadChildren: './lesson-end/lesson-end.module#LessonEndPageModule' },
   { path: 'test-start', loadChildren: './test-start/test-start.module#TestStartPageModule' },
   { path: 'test-end', loadChildren: './test-end/test-end.module#TestEndPageModule' },
  

@@ -10,4 +10,9 @@
 </ion-header>
 
 <ion-content> 
+  <ion-card>  
+    <ion-card-content *ngIf="dataHome">
+        <div [innerHTML]="dataHome">OK</div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

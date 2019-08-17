@@ -3,10 +3,15 @@
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>บทที่ 1 php แนะนำภาษา PHP</ion-title>
+        <ion-title *ngIf="lesson">{{lesson.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-</ion-content>
+<ion-content> 
+    <ion-card>  
+      <ion-card-content *ngIf="lesson">
+          <div [innerHTML]="lesson.detail"></div>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  
