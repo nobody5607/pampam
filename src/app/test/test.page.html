@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
@@ -8,27 +8,16 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid>
-        <ion-row>
+      <ion-card (click)="testStart(1)" color='secondary' [disabled]="!enableStartTest">
+        <ion-card-header>
+            <h2 class="text-center"><ion-icon name="paper"></ion-icon> แบบทดสอบก่อนเรียน</h2>
+        </ion-card-header> 
+      </ion-card>
 
-          <ion-col>
-            <ion-card (click)="testStart()">
-              <ion-card-header>
-                  <h1 class="text-center"><ion-icon name="paper"></ion-icon></h1>
-                <ion-card-subtitle class="text-center">แบบทดสอบก่อนเรียน</ion-card-subtitle> 
-              </ion-card-header> 
-            </ion-card>
-          </ion-col>
-
-          <ion-col>
-              <ion-card (click)="testEnd()">
-                  <ion-card-header>
-                      <h1 class="text-center"><ion-icon name="paper"></ion-icon></h1>
-                    <ion-card-subtitle class="text-center">แบบทดสอบหลังเรียน</ion-card-subtitle> 
-                  </ion-card-header> 
-                </ion-card>
-          </ion-col>
-           
-        </ion-row>
-      </ion-grid>
+      <ion-card (click)="testStart(2)" color='medium' [disabled]="!enableEndTest">
+          <ion-card-header>
+              <h2 class="text-center"><ion-icon name="paper"></ion-icon> แบบทดสอบหลังเรียน</h2>
+          </ion-card-header> 
+        </ion-card>
+       
 </ion-content>

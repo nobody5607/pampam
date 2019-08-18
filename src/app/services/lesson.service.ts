@@ -18,7 +18,8 @@ export class LessonService {
   setHttpHeaders() {
     const httpOptions = {
       headers: new HttpHeaders({ 
-        'Content-Type':  'application/json',
+        // 'Content-Type':  'application/json',
+        "Content-Type": "application/x-www-form-urlencoded",
         'x-token': this.mockToken
       })
     };
@@ -31,7 +32,7 @@ export class LessonService {
       catchError(this.handleError)
     );
   }
-  getLessons(search:string): Observable<any> {
+  getLessons(search: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/get-lesson?term=${search}`, this.setHttpHeaders()).pipe(
       map(results => results),
       catchError(this.handleError)
@@ -44,6 +45,50 @@ export class LessonService {
     );
   }
 
+  getTest(type): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get-test?type=${type}`, this.setHttpHeaders()).pipe(
+      map(results => results),
+      catchError(this.handleError)
+    );
+  }
+
+
+ saveTest(data, type): Observable<any> {
+
+
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'x-token': this.mockToken
+    })
+  };
+
+  const form = new FormData();
+  form.append('data', data);
+  form.append('type', type);
+
+  console.log(form);
+
+  return this.http.post(`${this.baseUrl}/save-test`, form, httpOptions).pipe(
+    map(results => results),
+    catchError(this.handleError)
+  );
+ }
+
+
+ Login(username, password): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-token': this.mockToken
+      })
+    };
+    const form = new FormData();
+    form.append('username', username);
+    form.append('password', password);
+    return this.http.post(`${this.baseUrl}/login`, form, httpOptions).pipe(
+      map(results => results),
+      catchError(this.handleError)
+    );
+ }
 
 
   private handleError(error: HttpErrorResponse) {
