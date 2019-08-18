@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'test-start', loadChildren: './test-start/test-start.module#TestStartPageModule' },
   { path: 'test-end', loadChildren: './test-end/test-end.module#TestEndPageModule' },
   { path: 'score', loadChildren: './score/score.module#ScorePageModule' },
+  { path: 'test-score', loadChildren: './test-score/test-score.module#TestScorePageModule' },
  
 ];
 

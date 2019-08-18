@@ -14,9 +14,15 @@
         </ion-card-header> 
       </ion-card>
 
-      <ion-card (click)="testStart(2)" color='medium' [disabled]="!enableEndTest">
+        <ion-card (click)="testStart(2)" style="background:#9C27B0;color:#fff;" color='primary' [disabled]="!enableEndTest">
           <ion-card-header>
               <h2 class="text-center"><ion-icon name="paper"></ion-icon> แบบทดสอบหลังเรียน</h2>
+          </ion-card-header> 
+        </ion-card>
+
+        <ion-card (click)="score()" color='warning'>
+          <ion-card-header>
+              <h2 class="text-center"> คะแนนแบบทดสอบก่อน/หลังเรียน</h2>
           </ion-card-header> 
         </ion-card>
        

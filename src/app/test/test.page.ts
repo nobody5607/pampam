@@ -9,8 +9,8 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./test.page.scss'],
 })
 export class TestPage implements OnInit {
-  enableStartTest: boolean = false;
-  enableEndTest: boolean = false;
+  enableStartTest: boolean = true;
+  enableEndTest: boolean = true;
 
   constructor(
     private router: Router,
@@ -23,9 +23,16 @@ export class TestPage implements OnInit {
     user = JSON.parse(user);
     console.log(user);
     if (parseInt(user['start_score']) > 0) {
-      this.enableStartTest = false;
-     
+      this.enableStartTest = false; 
     }
+
+    if (parseInt(user['end_score']) > 0) {
+      this.enableEndTest = false; 
+    }
+
+  }
+  score(){
+    this.router.navigate(['/test-score']);
   }
   testStart(type) {
     this.router.navigate(['/test-start', { type: type }]);
