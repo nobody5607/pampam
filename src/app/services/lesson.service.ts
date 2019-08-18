@@ -9,12 +9,17 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class LessonService {
 
-  private baseUrl = 'http://backend.project2.local/api';
+  private baseUrl = 'http://project.local/api';
   private mockToken = 'KSwmb0yFT6Jf14f82pSAnAedCN44uzAQ';
 
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+    let user = localStorage.getItem('user');
+    user = JSON.parse(user);
+    this.mockToken = user['token'];
+   }
   setHttpHeaders() {
     const httpOptions = {
       headers: new HttpHeaders({ 
