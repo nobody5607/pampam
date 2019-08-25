@@ -1,7 +1,9 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { LessonService } from './../../services/lesson.service';
 import { AlertController } from '@ionic/angular';
+import { AuthenticationService } from './../../services/authentication.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,13 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  isLoading = false;
   constructor(
     private router: Router,
     private lessonService: LessonService,
     public alertController: AlertController,
+    public authenticationService: AuthenticationService,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -21,16 +25,18 @@ export class LoginPage implements OnInit {
   Login(form) {
     const username = form.value.username;
     const password = form.value.password;
-
-    this.lessonService.Login(username, password)
-      .subscribe(result => {
-        if (result.success === true) {
-          localStorage.setItem('user', JSON.stringify(result.data));
-          this.router.navigate(['/home']); 
-        } else {
-          this.presentAlert('Warning', 'กรุณาตรวจสอบชื่อผู้ใช้และรหัสผ่าน');
-        }
-      });
+    this.present();
+    this.authenticationService.login(username, password).subscribe(result=>{
+      this.dismiss();
+      if (result['success'] === false){
+        this.presentAlert('Warning', 'กรุณาตรวจสอบ Username หรือ Password');
+        return false;
+      } else {
+        console.warn(result['success']);
+        this.router.navigate(['home']);
+      }
+    });
+    return false;
 
   }
 
@@ -42,5 +48,24 @@ export class LoginPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async present() {
+    this.isLoading = true;
+    return await this.loadingController.create({
+      duration: 5000,
+    }).then(a => {
+      a.present().then(() => {
+        console.log('presented');
+        if (!this.isLoading) {
+          a.dismiss().then(() => console.log('abort presenting'));
+        }
+      });
+    });
+  }
+
+  async dismiss() {
+    this.isLoading = false;
+    return await this.loadingController.dismiss().then(() => console.log('dismissed'));
   }
 }

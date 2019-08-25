@@ -14,6 +14,11 @@ export class HomePage {
     private lessonService: LessonService,
     public alertController: AlertController
   ) { }
+  ionViewWillEnter() {
+     console.warn('ionViewWillEnter');
+  }
+
+
   ngOnInit(): void {
     this.getData();
   }

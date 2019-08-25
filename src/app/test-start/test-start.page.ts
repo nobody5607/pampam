@@ -8,6 +8,7 @@ import { AlertController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { QuestionBase } from './question-base';
 import { ActivatedRoute } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-test-start',
@@ -24,17 +25,17 @@ export class TestStartPage implements OnInit {
     private lessonService: LessonService,
     public alertController: AlertController,
     private activeRouter: ActivatedRoute,
+    private storage: Storage,
   ) { }
 
   ngOnInit() {
+    this.getStudent();
     this.activeRouter.params.subscribe(params=>{
       console.log(params); 
       this.type = parseInt( params.type );
       if(this.type === 2){
          this.title = 'แบบทดสอบหลังเรียน';
-      } 
-
-      console.log(this.title);
+      }  
    });
     this.getData();
   }
@@ -56,13 +57,26 @@ export class TestStartPage implements OnInit {
     const data = JSON.stringify(this.answers);
     this.lessonService.saveTest(data, this.type)
     .subscribe(result=>{
-      localStorage.setItem('score', JSON.stringify(result));
-      this.router.navigate(['/score',{data: JSON.stringify(result)}]);
-      //this.presentAlert('Warning', result.data);
+      this.getStudent();
+      this.storage.set('score', JSON.stringify(result));
+      setTimeout(()=>{
+        this.router.navigate(['/score']);
+      },1000);
     }); 
+  }
+  getStudent(){
+     console.info('get-student....');
+    this.lessonService.getStudentByid().subscribe(result=>{
+      if(result != null){
+        this.storage.set('start_score',result['data']['start_score']);
+        this.storage.set('end_score',result['data']['end_score']);
+      }
+      //this.storage.set('USER_INFO', JSON.stringify(result['data'])).then((response) => {});
+    });
   }
 
   getData() {
+    console.info('get data test...');
     this.lessonService.getTest(this.type).subscribe(result => {
       if (result.success === true) {
         this.tests = result.data;

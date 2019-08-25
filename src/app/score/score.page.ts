@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LessonService } from './../services/lesson.service';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-score',
@@ -14,22 +15,20 @@ export class ScorePage implements OnInit {
       private router: Router,
       private activeRouter: ActivatedRoute,
       private lessonService: LessonService,
-      public alertController: AlertController
+      public alertController: AlertController,
+      private storage: Storage,
   ) { }
 
   ngOnInit() {
-    this.activeRouter.params.subscribe(params=>{
-      const data = localStorage.getItem('score');
-      if ( data === undefined || data === null) {
-        this.router.navigate(['/home']); 
+    console.info('get score...');
+    this.storage.get('score').then(result => {
+      if (result != null) {
+        this.data = JSON.parse(result);
+        const keys = Object.keys(this.data);
+        const len = keys.length;
+        this.data['count'] = len;
       }
-      this.data = JSON.parse(data);
-
-      const keys = Object.keys(this.data);
-      const len = keys.length; 
-      this.data['count'] = len;
-      console.log(this.data);
-   });
+    });
   }
 
 }

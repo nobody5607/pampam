@@ -11,22 +11,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { LessonService } from './services/lesson.service';
 import { HttpClientModule } from '@angular/common/http';
 
+import { IonicStorageModule } from '@ionic/storage';
 import { ReactiveFormsModule } from '@angular/forms'
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthenticationService } from './services/authentication.service';
+import { ComponentsModule } from './components/component.module.component';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
+    ComponentsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     LessonService,
     StatusBar,
     SplashScreen,
+    AuthenticationService,
+    AuthGuardService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

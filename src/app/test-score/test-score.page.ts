@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-test-score',
   templateUrl: './test-score.page.html',
@@ -8,19 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class TestScorePage implements OnInit {
   start_score:number = 0;
   end_score:number = 0;
-  constructor() { }
+  constructor(private storage: Storage) { }
 
   ngOnInit() {
-      let user = localStorage.getItem('user');
-      user = JSON.parse(user);
-      console.log(user);
-      if (parseInt(user['start_score']) > 0) {
-        this.start_score = user['start_score']; 
+    this.storage.get('start_score').then(startScore => {
+      console.info('start_score', startScore)
+      if(startScore >= 0){
+        this.start_score = startScore;
       }
-
-      if (parseInt(user['end_score']) > 0) {
-        this.end_score = user['end_score']; 
+    });
+    this.storage.get('end_score').then(end_score => {
+      if(end_score >= 0){
+        this.end_score = end_score;
       }
+    });
   }
 
 }
