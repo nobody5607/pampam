@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map,catchError, retry } from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 
@@ -10,20 +10,15 @@ import { AuthenticationService } from './authentication.service';
 })
 export class LessonService {
 
-  private baseUrl = 'http://backend.project2.local/api';
+  private baseUrl = 'http://project2.local/api';
   private mockToken = 'KSwmb0yFT6Jf14f82pSAnAedCN44uzAQ';
-
-  
-
   constructor(
     private http: HttpClient,
-    private authenticationService:AuthenticationService 
-    ) { 
- 
-  }
+    private authenticationService: AuthenticationService
+  ) { }
   setHttpHeaders() {
     const httpOptions = {
-      headers: new HttpHeaders({ 
+      headers: new HttpHeaders({
         // 'Content-Type':  'application/json',
         "Content-Type": "application/x-www-form-urlencoded",
         'x-token': this.mockToken
@@ -31,24 +26,22 @@ export class LessonService {
     };
     return httpOptions;
   }
-  getToken(){
-    this.authenticationService.getUser().then(res=>{
-      if(res !== undefined){
-        let user = JSON.parse(res);
+  getToken() {
+    this.authenticationService.getUser().then(res => {
+      if (res !== undefined) {
+        const user = JSON.parse(res);
         this.mockToken = user['token'];
         console.warn(user);
       }
-    
     });
   }
-  getStudentByid(){
+  getStudentByid() {
     this.getToken();
     return this.http.get(`${this.baseUrl}/get-student`, this.setHttpHeaders()).pipe(
       map(results => results),
       catchError(this.handleError)
     );
-  }
-
+  } 
   getData(params: string): Observable<any> {
     this.getToken();
     return this.http.get(`${this.baseUrl}/get-data?params=${params}`, this.setHttpHeaders()).pipe(
@@ -77,29 +70,27 @@ export class LessonService {
       map(results => results),
       catchError(this.handleError)
     );
+  } 
+  saveTest(data, type): Observable<any> {
+    this.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-token': this.mockToken
+      })
+    };
+
+    const form = new FormData();
+    form.append('data', data);
+    form.append('type', type);
+
+    console.log(form);
+
+    return this.http.post(`${this.baseUrl}/save-test`, form, httpOptions).pipe(
+      map(results => results),
+      catchError(this.handleError)
+    );
   }
-
-
- saveTest(data, type): Observable<any> {
-  this.getToken();
-
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'x-token': this.mockToken
-    })
-  };
-
-  const form = new FormData();
-  form.append('data', data);
-  form.append('type', type);
-
-  console.log(form);
-
-  return this.http.post(`${this.baseUrl}/save-test`, form, httpOptions).pipe(
-    map(results => results),
-    catchError(this.handleError)
-  );
- }
 
 
 
