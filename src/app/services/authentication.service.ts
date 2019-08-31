@@ -13,7 +13,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class AuthenticationService {
 
-  private baseUrl = 'http://backend.project2.local/api';
+  private baseUrl = 'http://project2.bloodcloud.online/api';
   authState = new BehaviorSubject(false);
 
   constructor(
