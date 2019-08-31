@@ -4,13 +4,13 @@ import { Observable, throwError } from 'rxjs';
 import { map,catchError, retry } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-
+import { environment } from './environment.prod';
 @Injectable({
   providedIn: 'root'
 })
 export class LessonService {
 
-  private baseUrl = 'http://backend.project2.local/api';
+  private baseUrl = `${environment.BASE_URL}/api`;//'http://backend.project2.local/api';
   private mockToken = 'KSwmb0yFT6Jf14f82pSAnAedCN44uzAQ';
 
   

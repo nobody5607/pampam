@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>แอปพลิเคชั่นสื่อการเรียนรู้</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="" padding>
-    <form #form="ngForm" (ngSubmit)="Login(form)">
+<ion-content center padding>
+    <form #form="ngForm" (ngSubmit)="Login(form)" >
       <ion-grid>
         <ion-row color="primary" justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -27,4 +27,18 @@
         </ion-row>
       </ion-grid>
     </form>
+
+    <ion-row class="bg-image" 
+    style="
+        background:url(../../assets/images/start.png);
+        background-size: 100% 100% !important;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        width: 100%;
+        height: 45%; 
+        position: fixed; 
+        bottom: 0; 
+  ">
+  </ion-row>
   </ion-content>

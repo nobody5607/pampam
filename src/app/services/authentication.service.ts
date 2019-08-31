@@ -6,14 +6,14 @@ import { ToastController, Platform } from '@ionic/angular';
 import { BehaviorSubject, throwError, Observable } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-
+import { environment } from './environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  private baseUrl = 'http://project2.bloodcloud.online/api';
+  private baseUrl = `${environment.BASE_URL}/api`;//'http://project2.bloodcloud.online/api';
   authState = new BehaviorSubject(false);
 
   constructor(

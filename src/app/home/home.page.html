@@ -17,7 +17,7 @@
       </ion-toolbar> 
 </ion-header>
 
-<ion-content> 
+<ion-content [scrollEvents]="true">> 
     <app-profile></app-profile>
   <ion-card>  
     <ion-card-content *ngIf="dataHome">
