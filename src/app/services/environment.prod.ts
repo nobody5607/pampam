@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    BASE_URL: 'http://project3.bloodcloud.online'
+    BASE_URL: 'http://project2.bloodcloud.online'
 };
