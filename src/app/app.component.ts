@@ -19,14 +19,9 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'เกี่ยวกับ',
-      url: '/about',
-      icon: 'information-circle-outline'
-    },
-    {
-      title: 'ติดต่อ',
-      url: '/contact',
-      icon: 'call'
+      title: 'ข้อมูลนักเรียน',
+      url: '/profile',
+      icon: 'contact'
     },
     {
       title: 'บทเรียน',
@@ -37,7 +32,22 @@ export class AppComponent {
       title: 'แบบทดสอบก่อน-หลังเรียน',
       url: '/test',
       icon: 'paper'
-    }
+    },
+    {
+      title: 'เกี่ยวกับ',
+      url: '/about',
+      icon: 'information-circle-outline'
+    },
+    {
+      title: 'ติดต่อ',
+      url: '/contact',
+      icon: 'call'
+    },
+     {
+      title: 'ออกจากระบบ',
+      url: '/logout',
+      icon: 'log-out'
+    } 
 
   ];
 

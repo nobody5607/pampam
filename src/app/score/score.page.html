@@ -1,8 +1,6 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+      
     <ion-title>คะแนนของคุณ</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -27,8 +25,13 @@
               
           </ion-card-title>
         </ion-card-header>
+        <ion-card-content>
+            <div class="btn-wrapper" style="text-align: center;">
+              <ion-button (click)="goHome()" color="primary">OK</ion-button></div>
+          
+        </ion-card-content>
       
-        <ion-card-content *ngIf="data" style="margin-bottom:100px;">
+        <!-- <ion-card-content *ngIf="data" style="margin-bottom:100px;">
             
             <ion-list *ngFor="let i of data['data']">
               <ion-label *ngIf="i.score == 1" color="success">{{i.number}}. {{i.question}} </ion-label> 
@@ -52,6 +55,6 @@
 
             </ion-list> 
 
-        </ion-card-content>
+        </ion-card-content> -->
       </ion-card>
 </ion-content>

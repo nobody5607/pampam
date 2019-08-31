@@ -11,7 +11,7 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  isLoading = false;
+  isLoading = false; 
   constructor(
     private router: Router,
     private lessonService: LessonService,
@@ -21,12 +21,12 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-  }
+  } 
   Login(form) {
     const username = form.value.username;
     const password = form.value.password;
     this.present();
-    this.authenticationService.login(username, password).subscribe(result=>{
+    this.authenticationService.login(username, password).subscribe(result => {
       this.dismiss();
       if (result['success'] === false){
         this.presentAlert('Warning', 'กรุณาตรวจสอบ Username หรือ Password');
@@ -35,8 +35,10 @@ export class LoginPage implements OnInit {
         console.warn(result['success']);
         this.router.navigate(['home']);
       }
+    }, error => {
+      this.presentAlert('Warning', error.toString());
+      
     });
-    return false;
 
   }
 

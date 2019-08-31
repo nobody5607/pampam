@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { ToastController, Platform } from '@ionic/angular';
 import { BehaviorSubject, throwError, Observable } from 'rxjs';
-import { map,catchError, retry } from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
- 
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class AuthenticationService {
     private storage: Storage,
     private platform: Platform,
     public toastController: ToastController
-  ) { 
+  ) {
     this.platform.ready().then(() => {
       this.ifLoggedIn();
     });
@@ -37,35 +37,41 @@ export class AuthenticationService {
   getUser() {
     return this.storage.get('USER_INFO').then(result => result);
   }
-  login(username, password):Observable<any> { 
-    const httpOptions = {headers: new HttpHeaders({})};
+  login(username, password): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({}) };
     const form = new FormData();
     form.append('username', username);
     form.append('password', password);
     return this.http.post(`${this.baseUrl}/login`, form, httpOptions).pipe(
       map(results => {
-        if(results['success'] === true) {
-          this.storage.set('start_score',results['data']['start_score']);
-          this.storage.set('end_score',results['data']['end_score']);
+        if (results['success'] === true) {
+          this.storage.set('start_score', results['data']['start_score']);
+          this.storage.set('end_score', results['data']['end_score']);
 
-          this.storage.set('USER_INFO', JSON.stringify(results['data'])).then((response) => { 
+          this.storage.set('USER_INFO', JSON.stringify(results['data'])).then((response) => {
             this.authState.next(true);
           });
         }
         return results;
       }),
-      catchError(this.handleError)
-    ); 
+      catchError(err => {
+        // console.warn('error', err);
+        throw new Error("Server Error");
+      })
+    );
 
   }
 
   logout() {
+    this.storage.remove('start_score').then(() => { });
+    this.storage.remove('end_score').then(() => { });
     this.storage.remove('USER_INFO').then(() => {
-      this.router.navigate(['login']);
+
+      this.router.navigate(['start']);
       this.authState.next(false);
     });
   }
- 
+
   isAuthenticated() {
     console.info('authState', this.authState.value);
     return this.authState.value;
