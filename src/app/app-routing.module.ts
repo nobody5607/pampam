@@ -28,6 +28,8 @@ const routes: Routes = [
   { path: 'test-score', loadChildren: './test-score/test-score.module#TestScorePageModule', canActivate: [AuthGuardService] },
   { path: 'start', loadChildren: './start/start.module#StartPageModule'},
   { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule', canActivate: [AuthGuardService] },
+  { path: 'practices', loadChildren: './practices/practices.module#PracticesPageModule' },
+  { path: 'test-answer', loadChildren: './test-answer/test-answer.module#TestAnswerPageModule' },
 
 ];
 

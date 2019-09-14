@@ -1,42 +1,22 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-    <ion-title>แบบทดสอบก่อน-หลังเรียน</ion-title>
+    <ion-title>แบบทดสอบก่อน-หลังเรียน และแบบฝึกหัด</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-profile></app-profile>
-      <ion-card (click)="testStart(1)" color='secondary' [disabled]="!enableStartTest">
-        <ion-card-header>
-            <h2 class="text-center"><ion-icon name="paper"></ion-icon> แบบทดสอบก่อนเรียน</h2>
-        </ion-card-header> 
-      </ion-card>
-
-        <ion-card (click)="testStart(2)" style="background:#9C27B0;color:#fff;" color='primary' [disabled]="!enableEndTest">
-          <ion-card-header>
-              <h2 class="text-center"><ion-icon name="paper"></ion-icon> แบบทดสอบหลังเรียน</h2>
-          </ion-card-header> 
-        </ion-card>
-
-        <ion-card (click)="score()" color='warning'>
-          <ion-card-header>
-              <h2 class="text-center"> คะแนนแบบทดสอบก่อน/หลังเรียน</h2>
-          </ion-card-header> 
-        </ion-card>
-        <ion-row class="bg-image" 
-        style="
-            /* background:url(../assets/images/start.png);
-            background-size: 100% 100% !important;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            width: 100%;
-            height: 35%; 
-            position: fixed; 
-            bottom: 0;  */
-      ">
-      </ion-row>     
+ <div style="text-align: center;">
+    <img src="../../assets/images/btn_start_test.jpg" (click)="testStart(1)" style="width:100%">
+    <img src="../../assets/images/btn_end_test.jpg" (click)="testStart(2)" style="width:100%">
+    <img src="../../assets/images/111.jpg" (click)="testAnswer()" style="width:100%">
+    <img style="width: 96%;height: 90px; margin-left: -27px;" src="../../assets/images/222.jpg" (click)="Practices()">
+    <img src="../../assets/images/11.jpg" (click)="AnPractices()" style="width:100%">
+    <img src="../../assets/images/22.jpg" (click)="score()" style="width: 90%;height: 90px;margin-left: -27px;">    
+  
+   </div>     
 </ion-content>
+
+

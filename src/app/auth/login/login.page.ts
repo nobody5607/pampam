@@ -22,6 +22,9 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   } 
+  ionViewWillEnter() {
+    console.warn('ionViewWillEnter'); 
+  }
   Login(form) {
     const username = form.value.username;
     const password = form.value.password;
@@ -31,8 +34,7 @@ export class LoginPage implements OnInit {
       if (result['success'] === false){
         this.presentAlert('Warning', 'กรุณาตรวจสอบ Username หรือ Password');
         return false;
-      } else {
-        console.warn(result['success']);
+      } else { 
         this.router.navigate(['home']);
       }
     }, error => {

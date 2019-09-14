@@ -17,15 +17,35 @@ export class LessonPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.getLessons();
-  } 
-  getLessons() {
-    this.lessonService.getLessons('').subscribe(result => {
-      if (result.success === true) {
-        this.lessons = result.data;
-      } else {
-        this.presentAlert('Warning', result.data);
+    this.getLessons('');
+  }
+  getItems(ev) {
+    const val = ev.target.value;
+    if (val && val.trim() != '') {
+      // Check the length
+      if(val.length < 3) { 
+        return;
       }
+      setTimeout(() => {
+        this.getLessons(val);
+      }, 1000);
+
+    }
+  } 
+  getLessons(term = '') {
+    this.lessonService.getLessons(term).subscribe(result => {
+      console.warn(result);
+      if(result === null){
+        this.lessons = [];
+         
+      }else{
+          if (result.success === true) {
+            this.lessons = result.data;
+          } else {
+            this.presentAlert('Warning', result.data);
+          }
+      }
+      
     });
   }
   lessonDetail(data: any) { 

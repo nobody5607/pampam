@@ -29,7 +29,7 @@ export class AppComponent {
       icon: 'book'
     }
     , {
-      title: 'แบบทดสอบก่อน-หลังเรียน',
+      title: 'แบบทดสอบก่อน-หลังเรียน และแบบฝึกหัด',
       url: '/test',
       icon: 'paper'
     },

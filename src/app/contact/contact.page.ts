@@ -14,7 +14,7 @@ export class ContactPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getData();
+    // this.getData();
   }
   getData() {
     this.lessonService.getData('contact').subscribe(result => {

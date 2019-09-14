@@ -21,7 +21,15 @@ export class TestPage implements OnInit {
   ) { }
 
   ngOnInit() {
+     this.getData(); 
+  }
+  ionViewWillEnter() {
+    console.warn('ionViewWillEnter');
     this.getData();
+  }
+
+  getData() {
+    console.info('get data test...');
     this.storage.get('start_score').then(start_score => {
       console.info('StartScore', start_score);
       if(start_score != null && start_score >= 0){
@@ -33,16 +41,29 @@ export class TestPage implements OnInit {
         this.enableEndTest = false;
       }
     });
+    
   }
 
-  getData() {
-    console.info('get data test...');
-    
+  Practices(){
+    this.router.navigate(['/test-end']);
+  }
+  AnPractices(){
+    this.router.navigate(['/practices']);
   }
   score(){
     this.router.navigate(['/test-score']);
   }
+  testAnswer(){
+    //test-answer
+    this.router.navigate(['/test-answer']);
+  }
   testStart(type) {
+    if(type === 1){
+       if(this.enableStartTest === false) return false;
+    }
+    if(type === 2){
+      if(this.enableEndTest === false) return false;
+   }
     this.router.navigate(['/test-start',{type:type}]);
   }
 }
