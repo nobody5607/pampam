@@ -32,12 +32,7 @@ export class AppComponent {
       title: 'แบบทดสอบก่อน-หลังเรียน และแบบฝึกหัด',
       url: '/test',
       icon: 'paper'
-    },
-    {
-      title: 'เกี่ยวกับ',
-      url: '/about',
-      icon: 'information-circle-outline'
-    },
+    }, 
     {
       title: 'ติดต่อ',
       url: '/contact',

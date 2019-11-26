@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 export class TestPage implements OnInit {
   enableStartTest: boolean = true;
   enableEndTest: boolean = true;
+  studentP:boolean = false;
 
   constructor(
     private router: Router,
@@ -22,6 +23,7 @@ export class TestPage implements OnInit {
 
   ngOnInit() {
      this.getData(); 
+     this.getStudentP();
   }
   ionViewWillEnter() {
     console.warn('ionViewWillEnter');
@@ -36,6 +38,7 @@ export class TestPage implements OnInit {
         this.enableStartTest = false;
       }
     });
+
     this.storage.get('end_score').then(end_score => {
       if(end_score != null && end_score >= 0){
         this.enableEndTest = false;
@@ -47,14 +50,36 @@ export class TestPage implements OnInit {
   Practices(){
     this.router.navigate(['/test-end']);
   }
-  AnPractices(){
+
+  getStudentP(){
+    this.lessonService.getStudentP().subscribe(res=>{
+      console.log('Student P');
+      console.log(res);
+      if(res['success'] == true){
+         this.studentP = true;
+      }
+    });
+  }
+  AnPractices(){ 
+    if(this.studentP === false){
+      return;
+    }
     this.router.navigate(['/practices']);
   }
   score(){
     this.router.navigate(['/test-score']);
   }
-  testAnswer(){
-    //test-answer
+  async testAnswer(){
+    //test-answer 
+    let startScore = await this.storage.get('start_score');
+    let endScore = await this.storage.get('end_score');
+
+    console.log('start score', startScore);
+    console.log('end score', endScore);
+    if(startScore === null || endScore === null){
+      return;
+    } 
+
     this.router.navigate(['/test-answer']);
   }
   testStart(type) {

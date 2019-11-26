@@ -4,3 +4,7 @@
 ion-toolbar, ion-header{
     --background: #f7e9c0;
   }
+  .hydrated {
+    visibility: inherit;
+    font-size: 10pt !important;
+}

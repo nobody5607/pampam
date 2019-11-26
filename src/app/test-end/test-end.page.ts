@@ -35,5 +35,8 @@ export class TestEndPage implements OnInit {
 
     });
   }
+  goBack(){
+    this.router.navigate(['/test']);
+  }
 
 }

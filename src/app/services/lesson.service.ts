@@ -45,6 +45,13 @@ export class LessonService {
       catchError(this.handleError)
     );
   }
+  getStudentP(){
+    this.getToken();
+    return this.http.get(`${this.baseUrl}/student-p`, this.setHttpHeaders()).pipe(
+      map(results => results),
+      catchError(this.handleError)
+    );
+  }
 
   getData(params: string): Observable<any> {
     this.getToken();
